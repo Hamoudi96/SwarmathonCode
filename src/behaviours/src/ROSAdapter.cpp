@@ -29,6 +29,7 @@
 
 #include "Point.h"
 #include "Tag.h"
+#include "SearchController.h"
 
 // To handle shutdown signals so the node quits
 // properly in response to "rosnode kill"
@@ -65,6 +66,8 @@ random_numbers::RandomNumberGenerator* rng;
 // Create logic controller
 
 LogicController logicController;
+
+
 
 void humanTime();
 
@@ -261,8 +264,9 @@ int main(int argc, char **argv) {
 void behaviourStateMachine(const ros::TimerEvent&)
 {
 
+	
   std_msgs::String stateMachineMsg;
-  
+
   // time since timerStartTime was set to current time
   timerTimeElapsed = time(0) - timerStartTime;
   
@@ -434,10 +438,10 @@ void targetHandler(const apriltags_ros::AprilTagDetectionArray::ConstPtr& messag
 
   // Don't pass April tag data to the logic controller if the robot is not in autonomous mode.
   // This is to make sure autonomous behaviours are not triggered while the rover is in manual mode. 
-  if(currentMode == 0 || currentMode == 1) 
-  { 
-    return; 
-  }
+  //if(currentMode == 0 || currentMode == 1) 
+  //{ 
+    //return; 
+  //}
 
   if (message->detections.size() > 0) {
     vector<Tag> tags;
@@ -462,7 +466,9 @@ void targetHandler(const apriltags_ros::AprilTagDetectionArray::ConstPtr& messag
       tags.push_back(loc);
     }
     
+	cout<<"i come here"<<endl;
     logicController.SetAprilTags(tags);
+   
   }
   
 }

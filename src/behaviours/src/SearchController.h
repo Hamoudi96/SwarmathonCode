@@ -3,6 +3,8 @@
 
 #include <random_numbers/random_numbers.h>
 #include "Controller.h"
+#include "Tag.h"
+#include "vector"
 
 /**
  * This class implements the search control algorithm for the rovers. The code
@@ -20,6 +22,9 @@ public:
   Result DoWork() override;
   bool ShouldInterrupt() override;
   bool HasWork() override;
+
+  // added code to perform better search
+  void setTags(vector<Tag> argTags);
 
   // sets the value of the current location
   //void UpdateData(geometry_msgs::Pose2D currentLocation, geometry_msgs::Pose2D centerLocation);
@@ -45,6 +50,8 @@ private:
   // Flag to allow special behaviour for the first waypoint
   bool first_waypoint = true;
   bool succesfullPickup = false;
+  vector<Tag> tags;
+  int index = 0;
 };
 
 #endif /* SEARCH_CONTROLLER */

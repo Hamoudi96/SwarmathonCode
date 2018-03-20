@@ -51,26 +51,91 @@ Result SearchController::DoWork() {
     if (first_waypoint)
     {
       first_waypoint = false;
-      searchLocation.theta = currentLocation.theta + M_PI;
-      searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
-      searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+
+      //searchLocation.theta = tags[0].currentLocation.theta;
+      //searchLocation.x = tags[0].currentLocation.x;
+      //searchLocation.e-e-y = tags[0].currentLocation.y;
+      
+        /* searchLocation.theta = tags[1].getPositionZ();
+	      searchLocation.x = tags[1].getPositionX();
+	      searchLocation.y =tags[1].getPositionY();
+		 
+              result.wpts.waypoints.clear();
+	      result.wpts.waypoints.insert(result.wpts.waypoints.begin(), searchLocation);
+	      index++;
+
+	      return result;*/
+	 
+      //searchLocation.theta = tags[20].getPositionZ();
+      //searchLocation.x = tags[20].getPositionX();
+      //searchLocation.y = tags[20].getPositionY();
+
+      //searchLocation.theta = currentLocation.theta + M_PI;
+      //searchLocatione-.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
+      //searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+
+      searchLocation.theta = 0.3;
+      searchLocation.x = 0.1;
+      searchLocation.y = 0.1;
+
     }
     else
     {
-      //select new heading from Gaussian distribution around current heading
-      searchLocation.theta = rng->gaussian(currentLocation.theta, 0.785398); //45 degrees in radians
-      searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
-      searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+
+    
+	     /* searchLocation.theta = tags[1].getPositionZ();
+	      searchLocation.x = tags[1].getPositionX();
+	      searchLocation.y =tags[1].getPositionY();
+		 
+              result.wpts.waypoints.clear();
+	      result.wpts.waypoints.insert(result.wpts.waypoints.begin(), searchLocation);
+	      index++;
+
+	      return result;
+	*/
+	//select new heading from for(int i=index; i < tags.size(); i++)	
+	// Gaussian distribution around current heading
+      //searchLocation.theta = rng->gaussian(currentLocation.theta, 0.785398); //45 degrees in radians
+      //searchLocation.x = currentLocation.x + (0.5 * cos(searchLocation.theta));
+      //searchLocation.y = currentLocation.y + (0.5 * sin(searchLocation.theta));
+
+      //searchLocation.theta = tags[0].currentLocation.theta;
+      //searchLocation.x = tags[0].currentLocation.x;
+      //searchLocation.y = tags[0].currentLocation.y;
+
+      searchLocation.theta = 0.3;
+      searchLocation.x = 0.2;
+      searchLocation.y = 0.2;
+
     }
 
+}
     result.wpts.waypoints.clear();
     result.wpts.waypoints.insert(result.wpts.waypoints.begin(), searchLocation);
     
     return result;
-  }
+
+  
 
 }
 
+void SearchController::setTags(vector<Tag> argTags)
+{
+
+	cout<<"set tags"<<endl;
+  
+
+   tags.clear();
+
+   for(int i=0; i < argTags.size(); i++)
+   {
+	tags.push_back(argTags[i]);
+   }
+      //for(int i=0; i < tags.size(); i++)
+	//cout<<"tag :" << tags[i]<<endl;
+	
+
+}
 void SearchController::SetCenterLocation(Point centerLocation) {
   
   float diffX = this->centerLocation.x - centerLocation.x;

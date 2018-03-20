@@ -378,6 +378,7 @@ void LogicController::SetAprilTags(vector<Tag> tags)
   pickUpController.SetTagData(tags);
   obstacleController.setTagData(tags);
   dropOffController.SetTargetData(tags);
+  searchController.setTags(tags);
 }
 
 // Give the specified controllers the sonar sensor values.

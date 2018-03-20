@@ -4,6 +4,7 @@
 #include <boost/math/quaternion.hpp> // For quaternion
 #include <tuple> // For packaging position and orientation values
 #include <iostream> // For output streams
+#include "Point.h"
 
 // Stores AprilTag data
 class Tag {
